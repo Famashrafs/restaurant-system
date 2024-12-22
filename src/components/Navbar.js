@@ -1,50 +1,48 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../components/css/Navbar.css";
+import logo from "../images/logo.png"
+import "./css/Navbar.css";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const handleToggle = () => {
+    setIsMobile(!isMobile);
   };
 
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
-          Restaurant
-        </Link>
-
-        <div className="hamburger" onClick={toggleMenu}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-
-        <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/menu">Menu</Link>
-          </li>
-          <li>
-            <Link to="/offers">Offers</Link>
-          </li>
-          <li>
-            <Link to="/order-online">Order Online</Link>
-          </li>
-          <li>
-            <Link to="/about-us">About Us</Link>
-          </li>
-          <li>
-            <Link to="/contact-us">Contact Us</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link> / <Link to="/sign-up">Sign Up</Link>
-          </li>
-        </ul>
+      <div className="navbar-logo">
+        <Link to="/"><img src={logo} alt="Pizza chic" /></Link>
+      </div>
+      <ul className={isMobile ? "navbar-links mobile" : "navbar-links"}>
+        <li>
+          <Link to="/" onClick={() => setIsMobile(false)}>Home</Link>
+        </li>
+        <li>
+          <Link to="/menu" onClick={() => setIsMobile(false)}>Menu</Link>
+        </li>
+        <li>
+          <Link to="/offers" onClick={() => setIsMobile(false)}>Offers</Link>
+        </li>
+        <li>
+          <Link to="/order-online" onClick={() => setIsMobile(false)}>Order Online</Link>
+        </li>
+        <li>
+          <Link to="/about-us" onClick={() => setIsMobile(false)}>About Us</Link>
+        </li>
+        <li>
+          <Link to="/contact-us" onClick={() => setIsMobile(false)}>Contact Us</Link>
+        </li>
+        <li>
+          <Link to="/login" className="login-btn" onClick={() => setIsMobile(false)}>Login</Link>
+        </li>
+        <li>
+          <Link to="/sign-up" className="signup-btn" onClick={() => setIsMobile(false)}>Sign Up</Link>
+        </li>
+      </ul>
+      <div className="navbar-toggle" onClick={handleToggle}>
+        {isMobile ? <span>&#x2715;</span> : <span>&#9776;</span>}
       </div>
     </nav>
   );

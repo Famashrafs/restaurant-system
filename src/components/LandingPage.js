@@ -1,14 +1,11 @@
 import React from "react";
+import LandingHeaderSlider from "../components/LandingHeaderSlider";
 import "../components/css/LandingPage.css";
 
 const LandingPage = () => {
   return (
     <div className="landing-page">
-      <header className="landing-header">
-        <h1>Welcome to [Restaurant Name]</h1>
-        <p>Your favorite meals delivered to your door</p>
-        <button className="order-now-btn">Order Now</button>
-      </header>
+      <LandingHeaderSlider />
 
       <section className="features">
         <div className="feature">
