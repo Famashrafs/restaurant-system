@@ -1,0 +1,81 @@
+/* General styles */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-logo img {
+  width: 70px;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.navbar-links li a:hover {
+  color: #ff7f50;
+}
+
+.login-btn,
+.signup-btn {
+  padding: 5px 15px;
+  border: 2px solid #ff7f50;
+  border-radius: 10px;
+  color: #ff7f50 !important;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover,
+.signup-btn:hover {
+  background: #ff7f50;
+  color: #fff !important;
+}
+
+/* Mobile styles */
+.navbar-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navbar-links.mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: 85vh;
+  background-color: #333;
+  padding: 10px 0;
+  z-index: 10;
+}
+
+.navbar-links.mobile li {
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+}

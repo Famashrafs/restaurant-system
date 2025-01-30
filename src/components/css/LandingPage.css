@@ -1,0 +1,35 @@
+.landing-page {
+    text-align: center;
+  }
+  
+  .landing-header {
+    background-image: url(../../images/landing-slider.jpg);
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    padding: 50px 20px;
+    margin-bottom: 30px;
+  }
+  
+  .order-now-btn {
+    padding: 10px 20px;
+    background-color: #5454eb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .feature {
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
