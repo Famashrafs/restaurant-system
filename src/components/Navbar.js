@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from '../context/AuthContext'; // Import the useAuth hook
 import logo from "../images/logo.png"
 import "./css/Navbar.css";
 
 const Navbar = () => {
+  const { user } = useAuth(); // Get the current user from the AuthContext
   const [isMobile, setIsMobile] = useState(false);
 
   const handleToggle = () => {
@@ -34,12 +36,15 @@ const Navbar = () => {
         <li>
           <Link to="/contact-us" onClick={() => setIsMobile(false)}>Contact Us</Link>
         </li>
-        <li>
-          <Link to="/login" className="login-btn" onClick={() => setIsMobile(false)}>Login</Link>
-        </li>
-        <li>
-          <Link to="/sign-up" className="signup-btn" onClick={() => setIsMobile(false)}>Sign Up</Link>
-        </li>
+        {/* Conditionally render Login and Signup or Dashboard */}
+        {!user ? (
+                    <>
+                        <li><Link to="/login">Login</Link></li>
+                        <li><Link to="/sign-up">Sign Up</Link></li>
+                    </>
+                ) : (
+                    <li><Link to="/dashboard">Dashboard</Link></li> // Show Dashboard button if the user is logged in
+                )}
       </ul>
       <div className="navbar-toggle" onClick={handleToggle}>
         {isMobile ? <span>&#x2715;</span> : <span>&#9776;</span>}

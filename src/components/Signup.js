@@ -1,31 +1,44 @@
-import React, { useState } from 'react';
-import logo from "../images/logo.png"
-import './css/Signup.css';
+import React, { useState } from "react";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import logo from "../images/logo.png";
+import "./css/Signup.css";
 
 const Signup = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        setError(""); // Reset error state
+
         if (password !== confirmPassword) {
-            alert('Passwords do not match!');
+            setError("Passwords do not match!");
             return;
         }
-        
-        // Handle sign-up logic here (for now, just console log)
-        console.log('Email:', email);
-        console.log('Password:', password);
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            console.log("User signed up:", userCredential.user);
+            alert("Signup successful!");
+            navigate("/login"); // Redirect to login page after signup
+        } catch (err) {
+            console.error("Signup error:", err.message);
+            setError(err.message);
+        }
     };
 
     return (
         <div className="signin-container">
             <header>
-            <div className="logo">
-                    <img style={{width:"200px"}} src={logo} alt='Pizza chic'/>
-                    <p>Welcome back! Please login to manage your restaurant.</p>
+                <div className="logo">
+                    <img style={{ width: "200px" }} src={logo} alt="Pizza chic" />
+                    <p>Create an account to manage your restaurant.</p>
                 </div>
             </header>
 
@@ -52,9 +65,10 @@ const Signup = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
+                    {error && <p className="error-message">{error}</p>}
                     <button type="submit" className="btn-signin">Sign Up</button>
                     <div className="links">
-                        <a href="#">Already have an account? Login</a>
+                        <a href="/login">Already have an account? Login</a>
                     </div>
                 </form>
             </div>
